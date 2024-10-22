@@ -8,7 +8,7 @@ from pygats.formatters import MarkdownFormatter as MD
 import subprocess
 import time
 
-# Контекст, содержащий форматтер, который описывает правила
+#Контекст, содержащий форматтер, который описывает правила
 ctx = pyg.Context(MD())
 
 
@@ -31,7 +31,6 @@ def setup(ctx):
 
 
 def teardown(ctx, server, browser):
-
     ctx.formatter.print_header(3, 'Завершение работы стенда')
     pyg.alt_with_key(ctx, 'F4')
     server.kill()
@@ -43,8 +42,8 @@ def test_greeteng():
     """
     Definition: Проверка функциональности первой страницы
     Actions:
-        1: Ввести имя в поле ввода
-        2: Нажать кнопку и поздороваться
+        1: Ввод имени в поле ввода
+        2: Нажатие на кнопку  поздороваться
 
     Expected: на экране надпись "Привет, Тестировщик!
     """
@@ -61,33 +60,32 @@ def test_greeteng():
     pyg.run_action(ctx, action_hello)
 
 
-
 def test_go_to_admin_panel():
     """
-    Definition: эта функция перехода в панель администратора
+    Definition: Проверка перехода в панель администратора
 
     Actions:
         1: переход в панель администратора
 
     Expected: пользователь перешел в панель администратора
     """
-    # проверить переход на 2 страницу 
+    #проверить переход на 2 страницу
     def come_to_admin():
         rec.click_text(ctx, rec.SearchedText('Перейти', 'rus', 'all'))
         rec.check_text_on_screen(ctx, rec.SearchedText('Форма', 'rus', 'all'))
 
-    pyg.run_action(ctx, come_to_admin) 
+    pyg.run_action(ctx, come_to_admin)
 
 
 def test_create_note():
     """
-    Definition: эта функция, которая вбивает значения в формы
+    Definition: Проверка создания учетной записи
 
     Actions:
-        1: Заполнить все формы
-        2: Создать учетную запись
+        1: Заполнение всех форм
+        2: Создание учетной записи
      
-    Expected: учетная заипсь создалась "Успешно"
+    Expected: учетная запись создалась "Успешно"
     """
   
     def forms():
@@ -108,14 +106,14 @@ def test_create_note():
 
         rec.click_text(ctx, rec.SearchedText('Страна', 'rus', 'all'))
 
-        # Нажимаем соответствую клавишу на клавиатуре
+        #Нажимаем соответствую клавишу на клавиатуре
         pyg.press(ctx, 'down')
         pyg.press(ctx, 'enter')
         
         rec.click_text(ctx, rec.SearchedText('Область', 'rus', 'all'))
         pyg.press(ctx, 'down')
         pyg.press(ctx, 'enter')
-    pyg.run_action(ctx,forms)#  првоерить возможность создать новую запись
+    pyg.run_action(ctx,forms) #првоерить возможность создать новую запись
 
 
     def create_account():
